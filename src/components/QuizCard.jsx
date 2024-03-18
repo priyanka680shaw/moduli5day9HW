@@ -1,21 +1,40 @@
-function QuizAppCard(){
+
+
+
+function QuizAppCard({question , questionNo , correct_answer , incorrect_answers}){
+
+
+    
     return(
         <>
             <div className="quizContainer">
                 <div className="quizinnerContainer">
-                    <h2>question no</h2>
-                    <h3>question</h3>
+                    <h2>{questionNo} . {question}</h2>
+                    <h3>{question}</h3>
                     <div className="quizoptions">
                         <ul>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
+                            <li>
+                                <button>{correct_answer}</button>
+                            </li>
+                            
+                            {
+                               // console.log( incorrect_answers)
+                                incorrect_answers &&  incorrect_answers.map((items , index)=>{
+                                  return (
+                                    <li>
+                                        <button>{items}</button>
+                                    </li>
+                                  )
+                                    
+                                    
+                                })
+                            }
+                           
                         </ul>
                     </div>
-                    <p>time left : 6</p>
+                    <p>Time Left {}</p>
                     <div>
-                        <button>Skip Question</button>
+                        <button >Skip Question</button>
                     </div>
                 </div>
             </div>

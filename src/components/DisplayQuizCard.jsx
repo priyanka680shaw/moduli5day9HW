@@ -12,9 +12,11 @@ useEffect(()=>{
     const ApiResponse = fetch(url)
                         .then((Response)=>Response.json()).
                         then((data)=>{
-                            console.log(data.results);
-                            setData(data.results);
-                            localStorage.setItem("data" , JSON.stringify(data.results));
+                            console.log(data)
+                            const dataRecived = data.results;
+                            setData(dataRecived);
+                            console.log("recived" , dataRecived)
+                            localStorage.setItem("data" , JSON.stringify(dataRecived));
                         })
   
 },[])
@@ -25,14 +27,17 @@ useEffect(()=>{
             <QuizAppCard/>
 
             {
-               data.map((items , index)=>{
+               data &&  data.map((items , index)=>{
+                const questionNo = index+1; 
                 return(
-                    <QuizAppCard/>
+                    <QuizAppCard question = {items.question
+                    } questionNo = {questionNo} correct_answer ={items.correct_answer} incorrect_answers={items.incorrect_answers} 
+                    />
                 )
                }) 
             }
         </div>
-           
+        
         </>
     )
 }
