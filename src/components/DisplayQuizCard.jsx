@@ -50,7 +50,7 @@ useEffect(()=>{
                }) 
             } */}
             {
-             data.length != 0 && data != undefined && <QuizAppCard question = {data[dataIndex].question}  questionNo ={dataIndex+1} correct_answer = {data[dataIndex].correct_answer} incorrect_answers={data[dataIndex].incorrect_answers} dataIndex={dataIndex} dataSetIndex={dataSetIndex} key = {dataIndex}/>
+             data.length != 0 && data != undefined && <QuizAppCard question = {data[dataIndex].question}  questionNo ={dataIndex+1} correct_answer = {data[dataIndex].correct_answer} incorrect_answers={data[dataIndex].incorrect_answers} dataIndex={dataIndex} dataSetIndex={dataSetIndex} />
              }
 
         </div>

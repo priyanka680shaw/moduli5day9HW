@@ -7,7 +7,6 @@ function QuizAppCard({question , questionNo , correct_answer , incorrect_answers
 const [result , setResult] = useState(0);
 const [timeInterval , setTimeInterval] = useState(0);
 useEffect(()=>{
-
     let timeIntervalId;
 
                         timeIntervalId = setInterval(()=>{
@@ -36,11 +35,11 @@ useEffect(()=>{
                             <li>
                                 <button onClick={()=>{
                                     setResult((previous)=>{
-                                        console.log(result)
                                         return(previous+1);
-                                     
                                     })
-                                    
+                                    dataSetIndex((previous)=>{
+                                        return previous+1;
+                                    })
                                 }}>{correct_answer}</button>
                             </li>
                             
@@ -81,11 +80,9 @@ useEffect(()=>{
                     </div>
                 </div>
                 <div>
-                    <h1>Result : {result}
                    {
                      (dataIndex===9 ? result : " ")
                    }
-                   </h1>
                 </div>
             </div>
         </>
