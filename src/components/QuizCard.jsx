@@ -1,10 +1,30 @@
+import { useEffect, useState } from "react"
 
 
 
-function QuizAppCard({question , questionNo , correct_answer , incorrect_answers}){
+function QuizAppCard({question , questionNo , correct_answer , incorrect_answers , dataIndex , dataSetIndex } ){
 
+const [result , setResult] = useState(0);
+const [timeInterval , setTimeInterval] = useState(0);
+useEffect(()=>{
 
-    
+    let timeIntervalId;
+
+                        timeIntervalId = setInterval(()=>{
+                            setTimeInterval((previous)=>{
+                                console.log("setTimeInterval");
+                                if((previous+1) === 5){
+                                    clearInterval(timeIntervalId);
+                                    dataSetIndex((previous)=>{
+                                        return previous+1;
+                                    })
+                                }
+                                return(previous+1);
+                            })
+                        } , 1000);
+                        return()=>clearInterval(timeIntervalId) //cleaning up
+} , [])
+
     return(
         <>
             <div className="quizContainer">
@@ -14,31 +34,62 @@ function QuizAppCard({question , questionNo , correct_answer , incorrect_answers
                     <div className="quizoptions">
                         <ul>
                             <li>
-                                <button>{correct_answer}</button>
+                                <button onClick={()=>{
+                                    setResult((previous)=>{
+                                        console.log(result)
+                                        return(previous+1);
+                                     
+                                    })
+                                    
+                                }}>{correct_answer}</button>
                             </li>
                             
                             {
                                // console.log( incorrect_answers)
                                 incorrect_answers &&  incorrect_answers.map((items , index)=>{
                                   return (
-                                    <li>
-                                        <button>{items}</button>
+                                    <li key={index}>
+                                        <button onClick={()=>{
+                                            dataSetIndex((previous)=>{
+                                                return previous+1;
+                                            })
+                                        }}>{items}</button>
                                     </li>
-                                  )
-                                    
-                                    
+                                  )  
                                 })
                             }
                            
                         </ul>
                     </div>
-                    <p>Time Left {}</p>
+                    <p>Time Left : {timeInterval}</p>
                     <div>
-                        <button >Skip Question</button>
+                        <button onClick={()=>{
+                            dataSetIndex((previous)=>{
+                                console.log("workingSkip")
+                               return(previous+1)
+                            })
+                        }}>Skip Question</button>
                     </div>
+                    <div>
+                        <button onClick={()=>{
+                            dataSetIndex((previous)=>{
+                                console.log("workingNext")
+                                return(previous+1)
+
+                            })
+                        }}>next</button>
+                    </div>
+                </div>
+                <div>
+                    <h1>Result : {result}
+                   {
+                     (dataIndex===9 ? result : " ")
+                   }
+                   </h1>
                 </div>
             </div>
         </>
     )
 }
 export default QuizAppCard;
+
